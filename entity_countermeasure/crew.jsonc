@@ -1,0 +1,81 @@
+{
+  // ============================================================
+  // CREW INFORMATION
+  // ============================================================
+
+  "name": "entity_countermeasure",
+
+  "agents": [
+    "decoy_specialist",
+    "infiltrator_specialist",
+    "analyzer_specialist"
+  ],
+
+  // ============================================================
+  // TASK DEFINITIONS
+  // ============================================================
+
+  "tasks": [
+
+    // ----------------------------------------------------------
+    // TASK 1 — DECOY SPECIALIST
+    // Used for HIGH / CRITICAL threat route.
+    // ----------------------------------------------------------
+    {
+      "name": "decoy_distraction_task",
+
+      "description": "Create a safe and fully simulated distraction strategy for The Entity. Generate simulated fake network activity only within the controlled mission environment. The purpose of the distraction is to divert The Entity's attention before the Infiltrator Specialist retrieves the authorized simulated intelligence artifact. Never interact with real networks, external systems, credentials, or unauthorized resources.",
+
+      "expected_output": "Return ONLY valid JSON using exactly these keys: agent, status, decoy_strategy, purpose, effectiveness_score, risk_level, and next_step. The agent must be \"Decoy Specialist\". Status must be \"success\" or \"failed\". Effectiveness_score must be a number from 0 to 100. Risk_level must be \"LOW\", \"MEDIUM\", \"HIGH\", or \"CRITICAL\". Do not include Markdown or additional text outside the JSON object.",
+
+      "agent": "decoy_specialist"
+    },
+
+    // ----------------------------------------------------------
+    // TASK 2 — INFILTRATOR SPECIALIST
+    // MARDINA'S AGENT
+    // ----------------------------------------------------------
+    {
+      "name": "infiltrator_retrieve_intelligence_task",
+
+      "description": "Retrieve an authorized simulated intelligence artifact from the controlled local mission environment. Use the Infiltrator custom tool to retrieve entity_fragment.txt from the project's data directory. Record the retrieved evidence and prepare it for the Analyzer Specialist. Never access real networks, credentials, external systems, or unauthorized files. If the artifact cannot be retrieved, report the failure instead of inventing information.",
+
+      "expected_output": "Return ONLY valid JSON using exactly these keys: agent, status, target_area, artifact_name, intelligence_summary, confidence_score, risk_level, and next_step. The agent must be \"Infiltrator Specialist\". Status must be \"success\" or \"failed\". Artifact_name must identify the simulated artifact being processed. Confidence_score must be a number from 0 to 100. Risk_level must be \"LOW\", \"MEDIUM\", \"HIGH\", or \"CRITICAL\". Do not include Markdown or additional text outside the JSON object.",
+
+      "agent": "infiltrator_specialist",
+
+      "tools": [
+        "custom:retrieve_mock_intelligence"
+      ]
+    },
+
+    // ----------------------------------------------------------
+    // TASK 3 — ANALYZER SPECIALIST
+    // ----------------------------------------------------------
+    {
+      "name": "analyze_simulated_intelligence_task",
+
+      "description": "Analyze the simulated intelligence artifact retrieved by the Infiltrator Specialist together with any available mission evidence. Identify weaknesses, anomalies, and threat indicators related to The Entity. Assess the overall threat level and provide safe, evidence-based defensive recommendations. Clearly identify uncertainty or missing information. Operate only within the simulated environment.",
+
+      "expected_output": "Return ONLY valid JSON using exactly these keys: agent, analysis_result, identified_weakness, confidence_score, threat_level, defensive_recommendation, mission_status, and next_step. Confidence_score must be a number from 0 to 100. Threat_level must be \"LOW\", \"MEDIUM\", \"HIGH\", or \"CRITICAL\". Do not include Markdown or additional text outside the JSON object.",
+
+      "agent": "analyzer_specialist",
+
+      "context": [
+        "infiltrator_retrieve_intelligence_task"
+      ]
+    }
+  ],
+
+  // ============================================================
+  // CREW CONFIGURATION
+  // ============================================================
+
+  "process": "sequential",
+
+  "verbose": true,
+
+  "memory": false,
+
+  "inputs": {}
+}

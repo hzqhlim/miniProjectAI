@@ -1,0 +1,11 @@
+ENTITY SIMULATION ARTIFACT
+
+Module: prediction_controller
+Status: experimental
+
+Observed indicators:
+- unexpected emergency shutdown flag
+- repeated authentication fallback condition
+- abnormal confidence threshold configuration
+
+This is simulated evidence created solely for the MAS mini-project.

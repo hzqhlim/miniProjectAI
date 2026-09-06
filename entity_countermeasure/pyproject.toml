@@ -1,0 +1,21 @@
+[project]
+name = "entity_countermeasure"
+version = "0.1.0"
+description = "entity_countermeasure using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.16,<2.0.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["agents", "crew.jsonc", "tools", "knowledge", "skills"]
+
+[tool.crewai]
+type = "crew"
+definition = "crew.jsonc"
+project_id = "ac1ff8ac-2f1e-4a12-b46c-acbf7ea6970e"
